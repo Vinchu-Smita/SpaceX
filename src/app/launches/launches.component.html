@@ -1,0 +1,168 @@
+<!-- <p>launches works!</p> -->
+<!-- <div class="container1" style="border: 1px solid;padding: 0; margin: 0;"> -->
+  <img src="./assets/images/Logo.jpg" alt="" style="cursor: pointer; margin-left: 700px;">
+
+<div class="container" >
+
+  <div class="row ">
+    
+    <div class="col-xl-12" style="justify-content: left; top: 20px;">
+      <!-- <app-filter class="filter"[list]="filterList" (onFilterChange)="filterChange($event)"  > </app-filter> -->
+
+      <i  class="fa fa-calendar" aria-hidden="true"> Past 6 Months
+        <input type="text" style="color:black ;"
+        ngxDaterangepickerMd [showCustomRangeLabel]="true"
+        [alwaysShowCalendars]="true"
+        [ranges]="ranges "
+        [linkedCalendars]="true"
+        [isInvalidDate] = "isInvalidDate"
+        placeholder="date"
+        (change)="dateRangeCreated($event)" 
+        />
+        
+    </i>
+    </div>
+    <div class="row">
+    <div class="col-xl-6" style="margin-left: 900px; bottom: 5px;">
+      <p>All Launches</p>
+      <app-filter class="filter"[list]="filterList" (onFilterChange)="filterChange($event)"  > </app-filter>
+    </div>
+    <!-- src="assets/images/Vector.jpg" -->
+  </div>
+  
+
+<table style="border: 1px solid; border-radius: 10px;" class="table-1" >
+    <thead class="thead" style="color: #1F2937;  font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;">
+     <tr style="font-family: normal;" >
+        <th class="row-flight-number" >No.</th>
+        <th style="width: 130px;">Launch (UTC)</th>
+        <th style="width: 120px;">Location</th> 
+        <th style="width: 120px;"> Mission</th>
+        <th style="width: 90px;">Orbit</th>
+        <th style="width: 120px;"> Launches Status</th>
+        <th style="width: 100px;"> Rocket </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr (click)="openmodalbox(spacetemplate,ans)"    *ngFor="let ans of filter | paginate: { itemsPerPage: 10, currentPage: page,totalItems:totalLength }">
+        <!-- routerLink="/launchmodel/{{ans.flight_number}}" -->
+        <td >{{ans.flight_number}} </td>
+        <td>{{ans.launch_date_utc | date : 'd MMMM y'}} {{ans.launch_date_utc | date :
+          'HH:mm'}}</td>
+        <td>{{ans.launch_site.site_name}}</td>
+        <td>{{ans.mission_name}}</td>
+        <td>{{ans['rocket']['second_stage']['payloads'][0]['orbit']}}</td>
+        <td class="badge" [ngClass]="{'badge-primary ':(!ans.launch_success && !ans.upcoming ),'badge-success':ans.launch_success,'badge-warning':ans.upcoming}" style="border-radius: 10px; align-items: center;padding: 9px;margin-top: 10px; margin-left: 30px;">{{ans.upcoming === true?
+          'Upcoming' : ans.launch_success === true ?'Success':'failed'}}</td>
+                  <td>{{ans.rocket.rocket_name}}</td>
+        
+     </tr>
+
+    </tbody>
+
+</table>
+<pagination-controls class="pagination" (pageChange)="page = $event"></pagination-controls>
+
+    <!-- </div> -->
+  <!-- </div> -->
+  <!-- <ng-template #template>
+    <div class="modal-header "  >
+      <h4 class="modal-title pull-left">Model Box</h4>
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" *ngFor="let ans of launches" >
+          <p >{{ans.flight_number}} </p>
+          <p>{{ans.launch_date_utc | datatime}}</p>
+          <p>{{ans.launch_site.site_name}}</p>
+          <p>{{ans.mission_name}}</p>
+          <p>{{ans['rocket']['second_stage']['payloads'][0]['orbit']}}</p>
+          <p>{{ans.launch_success?'success' :'failed'}}</p>
+          <p>{{ans.rocket.rocket_name}}</p>
+    </div>
+  </ng-template> -->
+  <div class="card-body" *ngIf="loading">
+    <div id="preloader"></div>
+  </div>
+  <ng-template #spacetemplate >
+    <div class="modal-header" >
+      <!-- <h4 class="modal-title pull-left">Modal Box</h4> -->
+      <button type="button" class="btn-close close " aria-label="Close" style="background: transparent; color: #1F2937;" (click)="modalRef?.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body"   style="color: #1F2937;  font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;">
+      <!-- style="font-family: Inter;font-style: normal;font-weight: normal; font-size: 14px; line-height: 24px; display: flex;align-items: center;color: #1F2937;" -->
+      <!-- {{details.launch_success}} -->
+      <table class="row">
+        <div class="col-xl-4">
+     <img src="{{spaceData.links.mission_patch}}" style="margin-left: 35px;">
+      </div>
+      
+        <thead  style="color: #1F2937;  font-family: Inter;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px; ">
+          <div class="col-xl-4 " style=" font-size: 14px;
+          line-height: 16px;margin-bottom: 10px; ">{{spaceData.mission_name}} {{ spaceData.launch_success?'success' :'failed'}}<br>{{spaceData.rocket.rocket_name}}
+          </div>
+          <!-- <hr> -->
+        </thead>
+        <tbody  style="color: #1F2937;  font-family: Inter;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        align-items: center;
+        line-height: 16px;
+        left: 32px; margin-left: 35px; flex-direction: column; " >
+          <!-- style="flex-direction: column;" -->
+          {{spaceData.details}}
+          <a> wikipedia{{spaceData.wikipedia}}</a>
+          <!-- <hr> -->
+          <tr class="trhead">
+            <td>flight_number :-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{spaceData.flight_number}}</td>
+          </tr>
+          
+          <tr>
+            <td>mission_name:- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{spaceData.mission_name}}</td>
+          </tr>
+          
+          <tr>
+            <td>rocket_type :-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{spaceData.rocket.rocket_type}}</td>
+          </tr>
+          <tr>
+            <td>Rocket:- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{spaceData.rocket.rocket_name}}</td>
+          </tr>
+          <tr>
+            <td> Manifacturer :-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{spaceData.rocket.second_stage.payloads[0].manufacturer}}</td>
+          </tr>
+          <tr>
+            <td>Nationality :-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{spaceData.rocket.second_stage.payloads[0].nationality}}</td>
+          </tr>
+          <tr>
+            <td> Launch-date:- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{spaceData.launch_date_utc}}</td>
+          </tr>
+          <tr>
+            <td>payload-type :-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{spaceData.rocket.second_stage.payloads[0].payload_type}}</td>
+          </tr>
+          <tr>
+            <td>Orbit:- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{spaceData.rocket.second_stage.payloads[0].orbit}}</td>
+          </tr>
+          <tr>
+            <td> launch-site:- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{spaceData.launch_site.site_name}}</td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </div>
+  </ng-template>
+
