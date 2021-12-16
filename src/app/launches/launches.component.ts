@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Launches } from './launches.model';
 import * as moment from 'moment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -6,6 +6,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { LaunchesdataService } from './launchesdata.service';
 import { Router } from '@angular/router';
 import{ MatTableDataSource} from '@angular/material/table';
+import { DaterangepickerDirective } from 'ngx-daterangepicker-material';
 // import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 // import { LaunchModelBoxComponent } from '../launch-model-box/launch-model-box.component';
 // import { MatDialogModule } from '@angular/material/dialog';
@@ -25,8 +26,8 @@ export class LaunchesComponent implements OnInit {
   selected:any= { startDate: moment, endDate: moment }
 alwaysShowCalendars: boolean;
 ranges: any = {
-  'Today': [moment(), moment()],
-  'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+  // 'Today': [moment(), moment()],
+  // 'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
   'Past Week': [moment().subtract(6, 'days'), moment()],
   'Past 3 Months': [moment().subtract(91, 'days'), moment()],
   'Past 6 Months': [moment().subtract(182, 'days'), moment()],
@@ -68,7 +69,7 @@ filter:any;
    data:Launches[]=[];
    @Input() list:any;
    @Output() onFilterChange = new EventEmitter();
-    
+   @ViewChild(DaterangepickerDirective, { static: false }) pickerDirective: DaterangepickerDirective;
   ngOnInit(): void {
     
     this.getlaunchesData();
@@ -79,20 +80,25 @@ filter:any;
     
   //       this.filter = this.filter.filter(x => x.CreatedDate == $event.toJSON().split('T')[0]);  
     
-  //     } 
-      dateRangeCreated(e) {  
-        console.log(e);
-            this.filter = this.launches;  
+  //     }
+  startDate:any;
+  endDate:any; 
+      dateRangeCreated(event:any) { 
+        // this.startDate;
+        // this.endDate; 
+               // this.pickerDirective.open();
+        console.log(event)
         
-            let startDate = e[0].splite(',')[0];  
-        
-            let endDate = e[1].splite(',')[0];  
-        
-            this.filter = this.filter.filter(  
-        
-              m => new Date(m.CreatedDate) >= new Date(startDate) && new Date(m.CreatedDate) <= new Date(endDate)  
-        
-            );  
+        // console.log(e);
+            this.filter = this.filter;  
+            // new Date(this.startDate) && new Date(this.endDate)
+       
+        // console.log(e[0]);
+        this.filter = this.filter.filter(m => {
+          
+          console.log(m);
+          // launch_date_utc
+        }  )  
        
           }
   getlaunchesData(){
