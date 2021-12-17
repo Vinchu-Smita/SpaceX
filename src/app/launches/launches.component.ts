@@ -94,7 +94,7 @@ filter:any;
             // new Date(this.startDate) && new Date(this.endDate)
        
         // console.log(e[0]);
-        this.filter = this.filter.filter(m => {
+        this.filter = this.launches.filter(m => {
           
           console.log(m);
           // launch_date_utc
