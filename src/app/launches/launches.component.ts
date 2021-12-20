@@ -67,6 +67,7 @@ filter:any;
    public length:any;
 
    data:Launches[]=[];
+   
    @Input() list:any;
    @Output() onFilterChange = new EventEmitter();
    @ViewChild(DaterangepickerDirective, { static: false }) pickerDirective: DaterangepickerDirective;
