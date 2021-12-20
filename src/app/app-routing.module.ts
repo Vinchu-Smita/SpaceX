@@ -4,7 +4,9 @@ import { LaunchModelBoxComponent } from './launch-model-box/launch-model-box.com
 import { LaunchesComponent } from './launches/launches.component';
 
 const routes: Routes = [
-  {path:"launches",component:LaunchesComponent},
+  {path:"launches/",component:LaunchesComponent},
+  // {path:"launches/:id",component:LaunchesComponent},
+
   {path:"launchmodel/:flight_number",component:LaunchModelBoxComponent}
 ];
 

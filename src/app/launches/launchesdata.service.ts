@@ -21,6 +21,12 @@ export class LaunchesdataService {
    
     // + `offset=${offset}&limit=${limit}`
     }
+    // getlaunchesData1(id:any){
+    //   return this.http.get<Launches[]>(
+    //     this.url
+    //   );
+     
+    //   }
     postData(keyName:any,Data:any){
       console.log(keyName);
       console.log(Data);

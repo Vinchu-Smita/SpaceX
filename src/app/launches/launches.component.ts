@@ -71,9 +71,13 @@ filter:any;
    @Output() onFilterChange = new EventEmitter();
    @ViewChild(DaterangepickerDirective, { static: false }) pickerDirective: DaterangepickerDirective;
   ngOnInit(): void {
+    // console.log(this.route)
     
+    // let id = this.route.snapshot.paramMap.get('id');
+    // this.launches = this.launcheservice.getlaunchesData1(id);
+
     this.getlaunchesData();
-  }
+   }
   // dateCreated($event){  
     
   //       this.filter = this.launches;  
