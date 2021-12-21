@@ -42,6 +42,7 @@ isInvalidDate = (m: moment.Moment) =>  {
  //filterdata
 
  launch_success:any;
+// public launch_success :any;
  
   filterList = {
     launch_success : ['success','failed', 'upcoming'],
@@ -67,7 +68,7 @@ filter:any;
    public length:any;
 
    data:Launches[]=[];
-   
+   filtertarget:any; 
    @Input() list:any;
    @Output() onFilterChange = new EventEmitter();
    @ViewChild(DaterangepickerDirective, { static: false }) pickerDirective: DaterangepickerDirective;
@@ -93,7 +94,10 @@ filter:any;
         // this.endDate; 
                // this.pickerDirective.open();
         console.log(event)
-        
+        console.log(this.selected.startDate._d.toLocaleDateString(),this.selected.endDate._d.toLocaleDateString())
+        // start:this.selected.startDate._d.toLocaleDateString(),
+      
+        this.launcheservice.getlaunchesData(this.selected)
         // console.log(e);
             this.filter = this.filter;  
             // new Date(this.startDate) && new Date(this.endDate)
@@ -140,6 +144,75 @@ filter:any;
     this.modalRef?.hide(); 
     this.spaceData =undefined
   }
+  combinefilter(s:any,t:any){
+ 
+    // const datepipe:DatePipe= new DatePipe('en-US');
+    // this.startdate=datepipe.transform(s.startDate._d,'yyyy-MM-dd');
+    // this.enddate=datepipe.transform(s.endDate._d,'yyyy-MM-dd');
+    //if both filter is selected --upcoming/past
+     if(t=="upcoming"||t=="past" && s!==null){
+      this.filtertarget=t+"?"+"start="+this.startDate+"&end="+this.endDate; 
+      this.launcheservice.FilterLaunch(`${this.filtertarget}`).subscribe(
+        (response)=>{
+      this.launches=response;
+      console.log(this.launches);
+      // this.errordiv=false;
+      if(this.launches.length<1){
+        // this.errordiv=true;
+        // this.tablemsg="No Result found for specified filter";
+      }
+      },
+        (error)=>{ 
+         })
+    }
+    //if both filters selected --success/fail
+    else if(t=="launch_success=true"||t=="launch_success=false" && s!==null){
+      this.filtertarget=t+"&"+"start="+this.startDate+"&end="+this.endDate; ; 
+      this.launcheservice.FilterCond(`${this.filtertarget}`).subscribe(
+        (response)=>{
+      this.launches=response;
+      // this.errordiv=false;
+      if(this.launches.length<1){
+        // this.errordiv=true;
+        // this.tablemsg="No Result found for specified filter";
+      
+      }
+      },
+        (error)=>{
+      })  
+    }}
+    //if only launch filter selected--upcoming/past
+    selectlaunchfilter(launchname:any,d:any){
+      if(launchname=="upcoming"||launchname=="past" &&d===null){
+        this.filtertarget=launchname; 
+        this.launcheservice.FilterLaunch(`${this.filtertarget}`).subscribe(
+          (response)=>{
+        this.launches=response;
+        // this.errordiv=false;
+        if(this.launches.length<1){
+          // this.errordiv=true;
+      //  this.tablemsg="No Result found for specified filter";
+        }
+        },
+          (error)=>{
+        })
+      }
+      //if only launch filter selected--success/fail
+    else if(launchname=="launch_success=true"||launchname=="launch_success=false" &&d===null)
+    {this.filtertarget=launchname; 
+      this.launcheservice.FilterCond(`${this.filtertarget}`).subscribe(
+        (response)=>{
+      this.launches=response;
+      // this.errordiv=false;
+      if(this.launches.length<1){
+        // this.errordiv=true;
+        // this.tablemsg="No Result found for specified filter";
+      
+       
+      }
+     },
+        (error)=>{
+      })}}
 copydata=this.launches;
 filterChange(appliedfilters:any) {
   this.copydata=this.launches

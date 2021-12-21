@@ -6,7 +6,7 @@
 
   <div class="row">
     
-    <div class="col-xl-12" style="justify-content: left; top: 20px;bottom: 30px;" >
+    <div class="col-xl-12" style="justify-content: left; top: 20px;bottom: 30px; margin-bottom: 10px;" >
       <!-- <app-filter class="filter"[list]="filterList" (onFilterChange)="filterChange($event)"  > </app-filter> -->
     
       <i  class="fa fa-calendar" aria-hidden="true">All Time
@@ -17,14 +17,25 @@
     <!-- {{selected.startDate._d}} -->
     </div>
     <div class="row">
-    <div class="col-xl-6" style="margin-left: 1020px; ">
+    <div class="col-xl-6" style="margin-left: 970px; bottom: 10px;">
        <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="./assets/images/dropdown.jpg"> -->
-      <h4>All Launches</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <!-- <h4>All Launches</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
       
-      <app-filter class="filter"[list]="filterList" (onFilterChange)="filterChange($event)" style="position: absolute; padding: 2px; left: -18px;bottom: 30px;  "  > </app-filter>
+      <app-filter class="filter"[list]="filterList" (onFilterChange)="filterChange($event)" style="position: absolute; padding: 2px; left: -10px;  "  > </app-filter>
+      <!-- <i class="fas fa-filter"></i> -->
+      <select class="nocolor" (change)="combinefilter(selected,t.value);selectlaunchfilter(t.value,selected);" #t  style="bottom: 20px; margin-left: -1px;">
+             <option  value="" >All Launches</option>
+              <option value="upcoming" > Upcoming Launches</option>
+                  <option value="past">Past Launches</option>
+                  <option value="launch_success=true" >SuccessFul Launches</option>
+                  <option value="launch_success=false" >Failed Launches</option>
+          </select>
     </div>
     <!-- src="assets/images/Vector.jpg" -->
   </div>
+  <!-- <div class="filterlaunches" id="#filter" style="margin-left: 900px; bottom: 10px;">
+   
+        </div> -->
   
 
 <table style="border: 1px solid; " class="table-1" >
