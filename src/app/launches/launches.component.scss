@@ -295,9 +295,13 @@ thead {
   border:none;
 }
 
-@media screen and (max-width:600px){
+@media screen and (max-width:400px){
+  .container{
+    width: 100%; 
+    // left: -10px;
+  }
   .filter1{
-     padding: 2px; left: -370px; margin-left: -380px;
+     padding: 2px; left: -370px; margin-left: -30px;
     // margin-left: 380px;
     // margin-left: -970px; 
     bottom: 2px;
