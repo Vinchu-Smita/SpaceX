@@ -21,7 +21,7 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 // import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModalModule, BsModalRef } from 'ngx-bootstrap/modal';
 import { MatTableModule } from '@angular/material/table';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
@@ -34,6 +34,7 @@ import { CommonModule } from '@angular/common';
     LaunchModelBoxComponent
   ],
   imports: [
+    ReactiveFormsModule,
     FormsModule,
     CommonModule,
     BrowserModule,

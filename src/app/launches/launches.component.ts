@@ -4,7 +4,7 @@ import * as moment from 'moment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 import { LaunchesdataService } from './launchesdata.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import{ MatTableDataSource} from '@angular/material/table';
 import { DaterangepickerDirective } from 'ngx-daterangepicker-material';
 // import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -24,12 +24,13 @@ export class LaunchesComponent implements OnInit {
 
   //calender data
   selected:any= { startDate: moment, endDate: moment }
+  
 alwaysShowCalendars: boolean;
 ranges: any = {
-  // 'Today': [moment(), moment()],
+  'Today': [moment(), moment()],
   // 'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-  'Past Week': [moment().subtract(6, 'days'), moment()],
-  'Past 3 Months': [moment().subtract(91, 'days'), moment()],
+  'Past 7 days': [moment().subtract(6, 'days'), moment()],
+  'Past 30 days': [moment().subtract(29, 'days'), moment()],
   'Past 6 Months': [moment().subtract(182, 'days'), moment()],
   'This Month': [moment().startOf('month'), moment().endOf('month')],
   'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
@@ -41,11 +42,11 @@ isInvalidDate = (m: moment.Moment) =>  {
 }
  //filterdata
 
- launch_success:any;
+ launch_success='all';
 // public launch_success :any;
  
   filterList = {
-    launch_success : ['success','failed', 'upcoming'],
+    launch_success : ['success','failed', 'upcoming','all'],
     }; 
   
     //modelbox for row data
@@ -56,7 +57,8 @@ filter:any;
   appliedfilters: any;
   loading:boolean=false;
   spaceData:any;
-  constructor(private launcheservice:LaunchesdataService,private modalService: BsModalService,private route:Router) { 
+  constructor(private route:ActivatedRoute,private launcheservice:LaunchesdataService,private modalService: BsModalService,private router:Router 
+   ) { 
     this.alwaysShowCalendars = true;
 
   }
@@ -74,7 +76,10 @@ filter:any;
    @ViewChild(DaterangepickerDirective, { static: false }) pickerDirective: DaterangepickerDirective;
   ngOnInit(): void {
     // console.log(this.route)
+    // console.log('la unches',this.launch_success)
+this.route.params.subscribe(x=> console.log(x))
     
+  
     // let id = this.route.snapshot.paramMap.get('id');
     // this.launches = this.launcheservice.getlaunchesData1(id);
 
@@ -94,32 +99,85 @@ filter:any;
         // this.endDate; 
                // this.pickerDirective.open();
         console.log(event)
-        console.log(this.selected.startDate._d.toLocaleDateString(),this.selected.endDate._d.toLocaleDateString())
+        // console.log(this.selected.startDate._d.toLocaleDateString(),this.selected.endDate._d.toLocaleDateString())
         // start:this.selected.startDate._d.toLocaleDateString(),
       
-        this.launcheservice.getlaunchesData(this.selected)
+        // this.launcheservice.getlaunchesData(this.selected)
+        this.routebyfilter(event.startDate._d.toLocaleDateString(),event.endDate._d.toLocaleDateString());
         // console.log(e);
-            this.filter = this.filter;  
+            // this.filter = this.filter;  
             // new Date(this.startDate) && new Date(this.endDate)
        
         // console.log(e[0]);
-        this.filter = this.launches.filter(m => {
+        // this.filter = this.launches.filter(m => {
           
-          console.log(m);
-          // launch_date_utc
-        }  )  
+        //   console.log(m);
+        // }  )  
        
           }
+          routebyfilter(start?:any, end?:any){
+            if(start !== undefined){
+              console.log(start,end,this.launch_success)
+              this.router.navigate(['/launches',start,end,this.launch_success])
+            } else { this.route.params.subscribe(x=> {console.log(x);
+              if(x['start'] !== undefined){
+              this.router.navigate(['/launches',x['start'],x['end'],this.launch_success])}
+           else{
+            this.router.navigate(['/launches',this.launch_success])
+          }
+          
+             }
+            )
+            // this.router.navigate([])
+            // path start, end, filter type
+              }
+            }
   getlaunchesData(){
-    const res = this.launcheservice.getlaunchesData();
-    res.subscribe((data:Launches[]) => {
-      this.filter =this.launches = data;
-      console.log(this.launches)
-    });
-    this.launcheservice.data.subscribe((item:any) => {
-      this.data = item;
+    // const res = this.launcheservice.getlaunchesData();
+    // res.subscribe((data:Launches[]) => {
+    //   this.filter =this.launches = data;
+    //   console.log(this.launches)
+    // });
+    // this.launcheservice.data.subscribe((item:any) => {
+    //   this.data = item;
      
-    });
+    // });
+    this.route.params.subscribe(c => {console.log(c);
+      if(c['launchType'] !== undefined){
+           this.launch_success= c['launchType'];
+  
+      }
+     if(c['start'] !== undefined){
+      if(c['launchType'] !== undefined && c['launchType']!=='all'){
+        this.launcheservice[c['launchType']](c['start'],c['end']).subscribe(x=>
+          this.filter = this.launches = x );
+      }
+      else{
+      const res = this.launcheservice.getlaunchesData(c['start'],c['end']);
+      res.subscribe((res:Launches[]) => {
+        this.filter =this.launches = res;
+        console.log(this.launches)
+      });
+    }
+     } else  {
+      if(c['launchType'] !== undefined && c['launcheType']=='all'){
+        this.launcheservice[c['launchType']](c['start'],c['end']).subscribe(x=>
+          this.filter = this.launches = x);
+      }else{
+      const res = this.launcheservice.getlaunchesData(c['start'],c['end']);
+      res.subscribe((res:Launches[]) => {
+        this.filter =this.launches = res;
+        console.log(this.launches)
+      });}
+     }
+  
+    })
+  
+    // this.launcheservice.data.subscribe((item:any) => {
+    //   this.data = item;
+     
+    // });
+  
    }
   openmodalbox(spacetemplate:any,ans:any){
   
@@ -150,94 +208,18 @@ filter:any;
     // this.startdate=datepipe.transform(s.startDate._d,'yyyy-MM-dd');
     // this.enddate=datepipe.transform(s.endDate._d,'yyyy-MM-dd');
     //if both filter is selected --upcoming/past
-     if(t=="upcoming"||t=="past" && s!==null){
-      this.filtertarget=t+"?"+"start="+this.startDate+"&end="+this.endDate; 
-      this.launcheservice.FilterLaunch(`${this.filtertarget}`).subscribe(
-        (response)=>{
-      this.launches=response;
-      console.log(this.launches);
-      // this.errordiv=false;
-      if(this.launches.length<1){
-        // this.errordiv=true;
-        // this.tablemsg="No Result found for specified filter";
-      }
-      },
-        (error)=>{ 
-         })
-    }
-    //if both filters selected --success/fail
-    else if(t=="launch_success=true"||t=="launch_success=false" && s!==null){
-      this.filtertarget=t+"&"+"start="+this.startDate+"&end="+this.endDate; ; 
-      this.launcheservice.FilterCond(`${this.filtertarget}`).subscribe(
-        (response)=>{
-      this.launches=response;
-      // this.errordiv=false;
-      if(this.launches.length<1){
-        // this.errordiv=true;
-        // this.tablemsg="No Result found for specified filter";
-      
-      }
-      },
-        (error)=>{
-      })  
-    }}
+     }
     //if only launch filter selected--upcoming/past
     selectlaunchfilter(launchname:any,d:any){
-      if(launchname=="upcoming"||launchname=="past" &&d===null){
-        this.filtertarget=launchname; 
-        this.launcheservice.FilterLaunch(`${this.filtertarget}`).subscribe(
-          (response)=>{
-        this.launches=response;
-        // this.errordiv=false;
-        if(this.launches.length<1){
-          // this.errordiv=true;
-      //  this.tablemsg="No Result found for specified filter";
-        }
-        },
-          (error)=>{
-        })
-      }
-      //if only launch filter selected--success/fail
-    else if(launchname=="launch_success=true"||launchname=="launch_success=false" &&d===null)
-    {this.filtertarget=launchname; 
-      this.launcheservice.FilterCond(`${this.filtertarget}`).subscribe(
-        (response)=>{
-      this.launches=response;
-      // this.errordiv=false;
-      if(this.launches.length<1){
-        // this.errordiv=true;
-        // this.tablemsg="No Result found for specified filter";
-      
-       
-      }
-     },
-        (error)=>{
-      })}}
+     }
 copydata=this.launches;
 filterChange(appliedfilters:any) {
   this.copydata=this.launches
  console.log(appliedfilters);
- 
+ this.routebyfilter();
+
 this.launch_success=appliedfilters.appliedFilterValues.launch_success;
-if(this.launch_success === 'success')
-{
-  // this.launches=this.launches.filter((res: { launch_success: boolean; })=> res.launch_success===this.launch_success);
-  
-  this.filter=this.launches.filter(res =>res.launch_success);
-  //  this.launches.push(this.launch_success) 
-  console.log();
-   console.log(this.launch_success);
-  }
-  else if(this.launch_success === 'upcoming'){
-    this.filter=this.launches.filter(res  =>!res.launch_success && res.upcoming);
-   } else if(this.launch_success === 'failed'){
-    this.filter=this.launches.filter(res  =>!res.launch_success && !res.upcoming);
-   }
-}
-}
-function res(res: any, arg1: any, arg2: boolean): any {
- throw new Error('Function not implemented.');
+
 }
 
-
-
+}
