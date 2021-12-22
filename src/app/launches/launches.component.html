@@ -18,11 +18,11 @@
     <!-- {{selected.startDate._d}} -->
     </div>
     <div class="row">
-    <div class="col-xl-6" style="margin-left: 970px; bottom: 10px;">
+    <div class="col-xl-6 mt-12 filter1" style="margin-left: 970px; bottom: 10px;">
        <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="./assets/images/dropdown.jpg"> -->
       <!-- <h4>All Launches</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
       
-      <app-filter  class="md-5 filter"[list]="filterList" (onFilterChange)="filterChange($event)" style="position: absolute; padding: 2px; left: 370px; margin-left: -380px; "  > </app-filter>
+      <app-filter  class=" filter"[list]="filterList" (onFilterChange)="filterChange($event)" style="position: absolute; padding: 2px; left: 370px; margin-left: -400px; "  > </app-filter>
       <!-- <i class="fas fa-filter"></i> -->
       <select class="nocolor" (change)="combinefilter(selected,t.value);selectlaunchfilter(t.value,selected);" #t  style="bottom: 20px; margin-left: -1px;">
              <option  value="" >All Launches</option>
@@ -72,7 +72,7 @@
     </tbody>
 
 </table>
-<pagination-controls class="pagination" (pageChange)="page = $event"></pagination-controls>
+<pagination-controls class=" pagination pagination1" (pageChange)="page = $event"></pagination-controls>
 
     <!-- </div> -->
   <!-- </div> -->
