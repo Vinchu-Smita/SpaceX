@@ -22,7 +22,7 @@
        <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="./assets/images/dropdown.jpg"> -->
       <!-- <h4>All Launches</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
       
-      <app-filter class="filter"[list]="filterList" (onFilterChange)="filterChange($event)" style="position: absolute; padding: 2px; left: -10px;  "  > </app-filter>
+      <app-filter  class="md-5 filter"[list]="filterList" (onFilterChange)="filterChange($event)" style="position: absolute; padding: 2px; left: 370px; margin-left: -380px; "  > </app-filter>
       <!-- <i class="fas fa-filter"></i> -->
       <select class="nocolor" (change)="combinefilter(selected,t.value);selectlaunchfilter(t.value,selected);" #t  style="bottom: 20px; margin-left: -1px;">
              <option  value="" >All Launches</option>

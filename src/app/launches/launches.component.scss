@@ -295,6 +295,9 @@ thead {
   border:none;
 }
 
-@media screen and (max-width:300px){
-  
+@media screen and (max-width:500px){
+  .filter{
+    left: -380px;
+    margin-left: 380px;
+  }
 }
