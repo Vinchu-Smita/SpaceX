@@ -321,5 +321,53 @@ thead {
     margin-top: 5px;
     border-radius: 5px;
 }
+.tablemain {
+  background-color: #fff;
+  box-shadow: 0 2px 5px 0 rgba(255,255,255);
+  position: fixed;
+  overflow-y: hidden;
+  // overflow-x: hidden;
+  // width: 100px;
+  left: 8px;
+
 }
+}
+@media screen and (max-width:800px){
+  .container{
+    width: 100%; 
+    // left: -10px;
+  }
+  .filter1{
+     padding: 2px; left: -370px; margin-left: -30px;
+    // margin-left: 380px;
+    // margin-left: -970px; 
+    bottom: 2px;
+  }
+  .pagination1{
+    display: flex;
+    justify-content: right;
+    margin-top: 10px;
+    width: 500px;
+    margin-left: 220px;
+    // margin-right: -600px;
+    // user-select: none;
+    left: -10px;
+    border: 1px solid lightgray;
+    // padding: 0;
+    padding-top: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+.tablemain {
+  background-color: #fff;
+  box-shadow: 0 2px 5px 0 rgba(255,255,255);
+  position: fixed;
+  overflow-y: hidden;
+  // overflow-x: hidden;
+  // width: 100px;
+  left: 8px;
+
+}
+}
+
 // https://space-dashboard1.herokuapp.com/

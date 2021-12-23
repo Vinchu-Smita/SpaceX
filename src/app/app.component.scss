@@ -2,7 +2,15 @@
     .container{
         cursor: pointer;
          justify-content: center;
-          margin-left: -100px;
+          margin-left: -150px;
+    }
+     
+  }
+  @media screen and (max-width:800px){
+    .container{
+        cursor: pointer;
+         justify-content: center;
+          margin-left: -120px;
     }
      
   }

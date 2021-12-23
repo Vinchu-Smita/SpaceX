@@ -219,7 +219,23 @@ filterChange(appliedfilters:any) {
  this.routebyfilter();
 
 this.launch_success=appliedfilters.appliedFilterValues.launch_success;
-
+// if(this.launch_success === 'success')
+//  {
+//    console.log(this.launch_success);  
+//    this.filter=this.launches.filter(nik =>nik.launch_success);
+//    this.launches.push(this.launch_success) 
+//    console.log();
+//    console.log(this.launch_success);
+//   //  this.launches=this.launches.filter((res: { launch_success: any; })=>res.launch_success===this.launch_success)
+//  } 
+//  else if(this.launch_success === 'upcoming'){
+//   this.filter=this.launches.filter(nik  =>!nik.launch_success && nik.upcoming);
+//  } else if(this.launch_success === 'failed'){
+//   this.filter=this.launches.filter(nik  =>!nik.launch_success && !nik.upcoming);
+//  }
 }
 
 }
+// function res(res: any, arg1: any, arg2: boolean): any {
+//   throw new Error('Function not implemented.');
+// }
