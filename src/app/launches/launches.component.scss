@@ -352,14 +352,14 @@ height: 20px;
   left: 8px;
 
 }
-// .modal-header1{
-//     width: 500px;
-//     left: 150px;
-// }
-.modal-content{
+
+.modal{
   width: 500px;
-// padding: 200px;
-    left: 150px;
+}
+.modal-content{
+  width: 500px !important;
+  left: 150px;
+
 }
 // .modal-body1{
 //     width: 400px;
@@ -374,6 +374,12 @@ height: 20px;
   .container{
     width: 100%; 
     // left: -10px;
+  }
+  .modal-content{
+    width: 450px !important;
+    // left: 150px;
+    right: -100px;
+  
   }
   .filter1{
      padding: 2px; left: -370px; margin-left: -30px;

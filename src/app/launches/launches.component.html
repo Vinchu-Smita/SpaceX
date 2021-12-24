@@ -96,7 +96,8 @@
   <div class="card-body" *ngIf="loading">
     <div id="preloader"></div>
   </div>
-  <ng-template #spacetemplate class="modal-content">
+  <ng-template #spacetemplate>
+    <div class="modal-content">
     <div class="modal-header"  >
       <!-- <h4 class="modal-title pull-left">Modal Box</h4> -->
       <button type="button" class="btn-close close " aria-label="Close" style="background: transparent; color: #1F2937;" (click)="modalRef?.hide()">
@@ -266,5 +267,6 @@
       </table>
       
     </div>
+  </div>
   </ng-template>
 
