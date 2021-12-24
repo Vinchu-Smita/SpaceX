@@ -24,7 +24,7 @@
       
       <app-filter  class=" filter"[list]="filterList" (onFilterChange)="filterChange($event)" style="position: absolute; padding: 2px; left: 370px; margin-left: -400px; "  > </app-filter>
       <!-- <i class="fas fa-filter"></i> -->
-      <select class="nocolor" (change)="combinefilter(selected,t.value);selectlaunchfilter(t.value,selected);" #t  style="bottom: 20px; margin-left: -1px;">
+      <select class="nocolor"  #t  style="bottom: 20px; margin-left: -1px;">
              <option  value="" >All Launches</option>
               <option value="upcoming" > Upcoming Launches</option>
                   <option value="past">Past Launches</option>
@@ -96,14 +96,14 @@
   <div class="card-body" *ngIf="loading">
     <div id="preloader"></div>
   </div>
-  <ng-template #spacetemplate >
-    <div class="modal-header" >
+  <ng-template #spacetemplate class="modal-content">
+    <div class="modal-header"  >
       <!-- <h4 class="modal-title pull-left">Modal Box</h4> -->
       <button type="button" class="btn-close close " aria-label="Close" style="background: transparent; color: #1F2937;" (click)="modalRef?.hide()">
         <span aria-hidden="true" class="visually-hidden">&times;</span>
       </button>
     </div>
-    <div class="modal-body"   style="color: #1F2937;  font-family: Inter;
+    <div class="modal-body modal-body1"   style="color: #1F2937;  font-family: Inter;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -112,7 +112,7 @@
       <!-- {{details.launch_success}} -->
       <table class="row">
         <div class="col-xl-4">
-     <img src="{{spaceData.links.mission_patch}}" style="margin-left: 35px;" alt="thumbnail" >
+     <img src="{{spaceData.links.mission_patch_small}}" style="margin-left: 35px; width: 100px;"  >
       </div>
       
         <thead  style="color: #1F2937;  font-family: Inter;

@@ -202,16 +202,7 @@ this.route.params.subscribe(x=> console.log(x))
     this.modalRef?.hide(); 
     this.spaceData =undefined
   }
-  combinefilter(s:any,t:any){
  
-    // const datepipe:DatePipe= new DatePipe('en-US');
-    // this.startdate=datepipe.transform(s.startDate._d,'yyyy-MM-dd');
-    // this.enddate=datepipe.transform(s.endDate._d,'yyyy-MM-dd');
-    //if both filter is selected --upcoming/past
-     }
-    //if only launch filter selected--upcoming/past
-    selectlaunchfilter(launchname:any,d:any){
-     }
 copydata=this.launches;
 filterChange(appliedfilters:any) {
   this.copydata=this.launches
@@ -222,16 +213,16 @@ this.launch_success=appliedfilters.appliedFilterValues.launch_success;
 // if(this.launch_success === 'success')
 //  {
 //    console.log(this.launch_success);  
-//    this.filter=this.launches.filter(nik =>nik.launch_success);
+//    this.filter=this.launches.filter(nik =>rea.launch_success);
 //    this.launches.push(this.launch_success) 
 //    console.log();
 //    console.log(this.launch_success);
 //   //  this.launches=this.launches.filter((res: { launch_success: any; })=>res.launch_success===this.launch_success)
 //  } 
 //  else if(this.launch_success === 'upcoming'){
-//   this.filter=this.launches.filter(nik  =>!nik.launch_success && nik.upcoming);
+//   this.filter=this.launches.filter(res  =>!res.launch_success && res.upcoming);
 //  } else if(this.launch_success === 'failed'){
-//   this.filter=this.launches.filter(nik  =>!nik.launch_success && !nik.upcoming);
+//   this.filter=this.launches.filter(res  =>!res.launch_success && !res.upcoming);
 //  }
 }
 
