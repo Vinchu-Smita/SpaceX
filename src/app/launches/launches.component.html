@@ -139,7 +139,98 @@
           {{spaceData.details}}
           <a href="{{spaceData.links.wikipedia}}"> wikipedia</a>
           <!-- <hr> -->
-          <tr class="trhead">
+          <table >
+            <div class="row tablerow " style="background-color: white;">
+              <div class="col-xl-4">
+                  <th>Flight Number</th> 
+                  </div>   
+                  <div class="col-xl-4">
+                   <td>{{spaceData.flight_number}}</td>  
+                  </div>
+          
+           </div>
+           <div class="row tablerow">
+               <div class="col-xl-4">
+                <th> Mission Name</th> 
+               </div>  
+               <div class="col-xl-4">
+          <td>{{spaceData.mission_name}}</td>  
+           </div> 
+       </div>
+       <div class="row tablerow">
+           <div class="col-xl-4">
+           <th>Rocket Type</th> 
+           </div>
+           <div class="col-xl-4">
+           <td>{{spaceData.rocket.rocket_type}}</td>  
+              </div> 
+              </div> 
+              <div class="row tablerow">
+               <div class="col-xl-4">
+                  <th> Rocket Name</th> 
+                  </div>
+                  <div class="col-xl-4">
+               <td>{{spaceData.rocket.rocket_name}}</td>
+               </div>  
+              </div>  
+              <div class="row tablerow">
+               <div class="col-xl-4">
+                  <th>Manufacturer</th> 
+                  </div>
+                  <div class="col-xl-4">
+               <td>{{spaceData.rocket.second_stage.payloads[0].manufacturer}}</td>
+               </div>  
+              </div> 
+              <div class="row tablerow">
+               <div class="col-xl-4">
+                  <th>Nationality</th> 
+                  </div>
+                  <div class="col-xl-4">
+               <td>{{spaceData.rocket.second_stage.payloads[0].nationality}}</td> 
+               </div> 
+              </div> 
+              <div class="row tablerow">
+               <div class="col-xl-4">
+                  <th>Launch Date</th> 
+                  </div>
+                  <div class="col-xl-4">
+                   <td>{{spaceData.launch_date_utc}}</td>
+                   </div>  
+              </div> 
+              <div class="row tablerow">
+               <div class="col-xl-4">
+                  <th>Payload Type</th> 
+                  </div>
+                  <div class="col-xl-4">
+               <td>{{spaceData.rocket.second_stage.payloads[0].payload_type}}</td>
+               </div>
+              </div> 
+              <div class="row tablerow">
+               <div class="col-xl-4">
+                  <th>Launch Date</th>
+                  </div>
+                  <div class="col-xl-4"> 
+               <td>{{spaceData.rocket.second_stage.payloads[0].nationality}}</td>
+               </div>  
+              </div>  
+              <div class="row tablerow">
+               <div class="col-xl-4">
+                  <th>Orbit</th> 
+                  </div>
+                  <div class="col-xl-4">
+               <td>{{spaceData.rocket.second_stage.payloads[0].orbit}}</td>  
+               </div>
+              </div> 
+              <div class="row tablerow1">
+               <div class="col-xl-4">
+                  <th>Launch Site</th> 
+                  </div>
+                  <div class="col-xl-4">
+               <td>{{spaceData.launch_site.site_name}}</td> 
+               </div> 
+              </div>     
+           </table>
+          <!-- <tr class="trhead">
             <td>flight_number :-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{spaceData.flight_number}}</td>
           </tr>
           
@@ -170,7 +261,7 @@
           </tr>
           <tr>
             <td> launch-site:- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{spaceData.launch_site.site_name}}</td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
       
