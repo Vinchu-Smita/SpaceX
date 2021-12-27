@@ -319,8 +319,10 @@ height: 20px;
 @media screen and (max-width:400px){
   .container{
     width: 100%; 
-    zoom: 50%;
+    zoom: 35%;
     // left: -150px;
+    overflow-x: hidden;
+    // overflow-y: hidden;
   }
   .filter1{
      padding: 2px; left: -370px; margin-left: -30px;
@@ -361,8 +363,8 @@ table tr.thmain{
   width: 500px;
 }
 .modal-content{
-  width: 600px !important;
-  left: 150px;
+  width: 400px !important;
+  left: 80px;
 
 }
 // .tablerow{
