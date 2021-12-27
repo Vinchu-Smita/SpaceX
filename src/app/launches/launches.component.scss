@@ -319,6 +319,7 @@ height: 20px;
 @media screen and (max-width:400px){
   .container{
     width: 100%; 
+    zoom: 50%;
     // left: -150px;
   }
   .filter1{
@@ -352,7 +353,10 @@ height: 20px;
   left: 8px;
 
 }
+table tr.thmain{
+  width: 50px;
 
+}
 .modal{
   width: 500px;
 }
@@ -371,9 +375,7 @@ height: 20px;
 // .class1{
 //   width: 500px;
 // }
-table tr.thmain{
-      width: 50%;
-}
+
 }
 
 @media screen and (max-width:800px){
