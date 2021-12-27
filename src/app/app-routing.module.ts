@@ -6,7 +6,7 @@ import { LaunchesComponent } from './launches/launches.component';
 const routes: Routes = [
   {path:"",component:LaunchesComponent},
   {path:"launches/:start/:end/:launchType",component:LaunchesComponent},
-  {path:"launches/launchType",component:LaunchesComponent},
+  {path:"launches/:launchType",component:LaunchesComponent},
   // {path:"launches/:id",component:LaunchesComponent},
 
   {path:"launchmodel/:flight_number",component:LaunchModelBoxComponent}

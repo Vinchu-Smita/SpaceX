@@ -1,8 +1,19 @@
 @media screen and (max-width:400px){
-    .container{
+    .container1{
         cursor: pointer;
          justify-content: center;
-          margin-left: -150px;
+          margin-left: -700px;
+          padding-left: -500px;
+          zoom: 40%;
+          // text-align: center;
+          // right: -800px;
+          // left: 50%px;
+          overflow-x: hidden;
+          right: 50px;
+    }
+    .container1 img{
+      margin-left: -300px;
+      bottom: 10px;
     }
      
   }
@@ -10,7 +21,8 @@
     .container{
         cursor: pointer;
          justify-content: center;
-          margin-left: -120px;
+          margin-left: 180px;
+          zoom: 60%;
     }
      
   }

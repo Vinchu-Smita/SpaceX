@@ -42,7 +42,7 @@ isInvalidDate = (m: moment.Moment) =>  {
 }
  //filterdata
 
- launch_success="all";
+ launch_success= 'all';
 // public launch_success :any;
  
   filterList = {
@@ -145,10 +145,11 @@ this.route.params.subscribe(x=> console.log(x))
     this.route.params.subscribe(c => {console.log(c);
       if(c['launchType'] !== undefined){
            this.launch_success= c['launchType'];
+           console.log(c['launchType']);
   
       }
      if(c['start'] !== undefined){
-      if(c['launchType'] !== undefined && c['launchType']!=='all'){
+      if(c['launchType'] !== undefined && c['launchType'] !== 'all'){
         this.launcheservice[c['launchType']](c['start'],c['end']).subscribe(x=>
           this.filter = this.launches = x );
       }
@@ -160,7 +161,7 @@ this.route.params.subscribe(x=> console.log(x))
       });
     }
      } else  {
-      if(c['launchType'] !== undefined && c['launcheType']=='all'){
+      if(c['launchType'] !== undefined && c['launcheType'] !== 'all'){
         this.launcheservice[c['launchType']](c['start'],c['end']).subscribe(x=>
           this.filter = this.launches = x);
       }else{
