@@ -8,17 +8,62 @@
     
     <div class="col-xl-12 calender" style="justify-content: left; top: 20px;bottom: 30px; margin-bottom: 10px;" >
       <!-- <app-filter class="filter"[list]="filterList" (onFilterChange)="filterChange($event)"  > </app-filter> -->
-    
-      <i  class="fa fa-calendar" aria-hidden="true">All Time
-        <input type="text" style="color:black ;font-size: 14px;" ngxDaterangepickerMd [showCustomRangeLabel]="true"[alwaysShowCalendars]="true"[ranges]="ranges "[linkedCalendars]="true"
-      [isInvalidDate] = "isInvalidDate"placeholder="date"(change)="dateRangeCreated($event)" 
+      <i class="material-icons date-range-icon ngx-daterangepicker-action" (click)="openDatepicker()" style="margin-top: 5px;"> date_range </i>
+     &nbsp; <input style="margin-bottom:10px;"
+      class="date-picker"
+      type="text"
+      ngxDaterangepickerMd
+      [showCustomRangeLabel]="true"
+      [showRangeLabelOnInput]="true"
+      [alwaysShowCalendars]="true"
+      [linkedCalendars]="true"
+      [ranges]="ranges"
+      [showCancel]="true"
+      [showClearButton]="true"
+      
+      placeholder="Select a Launch Date"
+      (datesUpdated)="datesUpdated($event)"
+      #dtpicker
+      readonly
+    />
+    <i class="material-icons arrow-down-icon ngx-daterangepicker-action" (click)="openDatepicker()"> keyboard_arrow_down </i>
+
+  
+    <!-- <input class="date-picker"
+          type="text"
+          [ngStyle]="{'width.px': getInputSize(dtpicker)}"
+          ngxDaterangepickerMd
+          [(ngModel)]="selected"
+          [showCustomRangeLabel]="true"
+          [showRangeLabelOnInput]="true"
+          [alwaysShowCalendars]="true"
+          [linkedCalendars]="true"
+          [ranges]="ranges"
+          [showCancel]="true"
+          [showClearButton]="true"
+          [locale]="localeConfig"
+          placeholder="Select a Launch Date"
+          (datesUpdated)="datesUpdated($event)"
+          #dtpicker
+          readonly
+        /> -->
+      <!-- <i  class="fa fa-calendar" aria-hidden="true">All Time
+        <input type="text" style="color:black ;font-size: 14px;"
+         ngxDaterangepickerMd [showCustomRangeLabel]="true"
+         [alwaysShowCalendars]="true"
+         [ranges]="ranges "
+         [linkedCalendars]="true"
+         [isInvalidDate] = "isInvalidDate"
+         placeholder="date"
+         (change)="dateRangeCreated($event)" 
       />
-      <!-- [(ngModel)]="selected" -->
-      </i>
+      </i> -->
+            <!-- [(ngModel)]="selected" -->
+
     <!-- {{selected.startDate._d}} -->
     </div>
     <div class="row">
-    <div class="col-xl-6 mt-12 filter1 filter2" style="margin-left: 970px; bottom: 10px;">
+    <div class="col-xl-6 mt-12 filter1 filter2" style="margin-left: 970px; bottom: 20px;">
        <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="./assets/images/dropdown.jpg"> -->
       <!-- <h4>All Launches</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
       

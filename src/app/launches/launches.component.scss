@@ -316,16 +316,18 @@ height: 20px;
   border:none;
 }
 
-@media screen and (max-width:400px)and (min-width:0px){
+@media screen and (max-width:400px){
   .container{
     width: 100%; 
-    zoom: 40%;
+    zoom: 42%;
     // left: -150px;
     overflow-x: auto;
     // position: absolute;
 
     // overflow-y: hidden;
     left: -30px;
+    overflow:scroll ;
+    // overflow-y: auto;
   }
   // .container1{
   //   zoom: 35%;

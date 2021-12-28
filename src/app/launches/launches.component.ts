@@ -26,15 +26,41 @@ export class LaunchesComponent implements OnInit {
   selected:any= { startDate: moment, endDate: moment }
   
 alwaysShowCalendars: boolean;
+// ranges: any = {
+//   'Today': [moment(), moment()],
+//   // 'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+//   'Past 7 days': [moment().subtract(6, 'days'), moment()],
+//   'Past 30 days': [moment().subtract(29, 'days'), moment()],
+//   'Past 6 Months': [moment().subtract(182, 'days'), moment()],
+//   'This Month': [moment().startOf('month'), moment().endOf('month')],
+//   'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+// }
 ranges: any = {
-  'Today': [moment(), moment()],
-  // 'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-  'Past 7 days': [moment().subtract(6, 'days'), moment()],
-  'Past 30 days': [moment().subtract(29, 'days'), moment()],
-  'Past 6 Months': [moment().subtract(182, 'days'), moment()],
-  'This Month': [moment().startOf('month'), moment().endOf('month')],
-  'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-}
+  'Past week': [
+    moment().subtract(1, 'week').startOf('week'),
+    moment().subtract(1, 'week').endOf('week'),
+  ],
+  'Past month': [
+    moment().subtract(1, 'month').startOf('month'),
+    moment().subtract(1, 'month').endOf('month'),
+  ],
+  'Past 3 months': [
+    moment().subtract(3, 'months').startOf('month'),
+    moment().subtract(1, 'month').endOf('month'),
+  ],
+  'Past 6 months': [
+    moment().subtract(6, 'month').startOf('month'),
+    moment().subtract(1, 'month').endOf('month'),
+  ],
+  'Past year': [
+    moment().subtract(1, 'year').startOf('year'),
+    moment().subtract(1, 'month').endOf('month'),
+  ],
+  'Past 2 years': [
+    moment().subtract(2, 'year').startOf('year'),
+    moment().subtract(1, 'month').endOf('month'),
+  ],
+};
 invalidDates: moment.Moment[] = [moment().add(2, 'days'), moment().add(3, 'days'), moment().add(5, 'days')];
 
 isInvalidDate = (m: moment.Moment) =>  {
@@ -42,7 +68,7 @@ isInvalidDate = (m: moment.Moment) =>  {
 }
  //filterdata
 
- launch_success= 'all';
+ launch_success='all';
 // public launch_success :any;
  
   filterList = {
@@ -71,6 +97,7 @@ filter:any;
 
    data:Launches[]=[];
    filtertarget:any; 
+   inputSizes: {};
    @Input() list:any;
    @Output() onFilterChange = new EventEmitter();
    @ViewChild(DaterangepickerDirective, { static: false }) pickerDirective: DaterangepickerDirective;
@@ -92,8 +119,33 @@ this.route.params.subscribe(x=> console.log(x))
   //       this.filter = this.filter.filter(x => x.CreatedDate == $event.toJSON().split('T')[0]);  
     
   //     }
+  datesUpdated(e:any){
+    this.routebyfilter(e.startDate._d.toLocaleDateString(),e.endDate._d.toLocaleDateString());
+
+  }
+  openDatepicker(){
+    this.pickerDirective.open();
+
+  }
+  // getInputSize(datepicker: HTMLInputElement) {
+  //   switch (datepicker.value) {
+  //     case 'Past week':
+  //       return 140;
+  //     case 'Past month':
+  //       return 140;
+  //     case 'Past 3 months':
+  //       return 150;
+  //     case 'Past 6 months':
+  //       return 150;
+  //     case 'Past year':
+  //       return 140;
+  //     case 'Past 2 years':
+  //       return 150;
+  //   }
+  // }
   startDate:any;
-  endDate:any; 
+  endDate:any;
+
       dateRangeCreated(event:any) { 
         // this.startDate;
         // this.endDate; 
