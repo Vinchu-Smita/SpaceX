@@ -35,9 +35,17 @@ alwaysShowCalendars: boolean;
 //   'This Month': [moment().startOf('month'), moment().endOf('month')],
 //   'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
 // }
+localeConfig = {
+  format: 'MM/DD/YYYY',
+  displayFormat: 'DD MMM y',
+  direction: 'ltr',
+  separator: ' To ',
+  cancelLabel: 'Cancel',
+  customRangeLabel: 'Custom range',
+};
 ranges: any = {
   'Past week': [
-    moment().subtract(1, 'week').startOf('week'),
+    moment().subtract(1, 'year').startOf('year'),
     moment().subtract(1, 'week').endOf('week'),
   ],
   'Past month': [

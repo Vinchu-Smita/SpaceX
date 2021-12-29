@@ -50,10 +50,10 @@ return(ans);
  failed(start?:string,end?: string){
   if(start === undefined)
   {
-  return this.http.get<Launches[]>('https://api.spacexdata.com/v3/launches');
+  return this.http.get<Launches[]>(`https://api.spacexdata.com/v3/launches?launch_success=false&upcoming=false`);
  }else 
   {
- return this.http.get<Launches[]>(`https://api.spacexdata.com/v3/launches?launch_success=${false}`)
+ return this.http.get<Launches[]>(`https://api.spacexdata.com/v3/launches?start=${start}&end=${end}&launch_success=false&upcoming=false`)
  }
  
   
@@ -61,21 +61,22 @@ return(ans);
 success(start?:string,end?: string){
   if(start === undefined)
   {
-  return this.http.get<Launches[]>('https://api.spacexdata.com/v3/launches');
+  return this.http.get<Launches[]>('https://api.spacexdata.com/v3/launches?launch_success=true');
  }else 
   {
- return this.http.get<Launches[]>(`https://api.spacexdata.com/v3/launches?launch_success=${true}`)
+ return this.http.get<Launches[]>(`https://api.spacexdata.com/v3/launches?start=${start}&end=${end}&launch_success=true`)
  }
 }
 
 upcoming(start?:string,end?: string){
 if(start === undefined)
 {
-return this.http.get<Launches[]>('https://api.spacexdata.com/v3/launches');
+return this.http.get<Launches[]>('https://api.spacexdata.com/v3/launches/upcoming');
 }else 
 {
-return this.http.get<Launches[]>(`https://api.spacexdata.com/v3/launches/upcoming`)
+return this.http.get<Launches[]>(`https://api.spacexdata.com/v3/launches/upcoming?start=${start}&end=${end}`)
 }
+// (`https://api.spacexdata.com/v3/launches/upcoming?start=${start}&end=${end}`)
 }
 // all(start?:string,end?: string){
 // if(start === undefined)

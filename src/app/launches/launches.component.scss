@@ -411,8 +411,18 @@ table tr.thmain{
 @media screen and (max-width:800px){
   .container{
     width: 100%; 
-    zoom: 45%;
-    // left: -10px;
+    // zoom: 60%;
+    // left: -610px;
+    // width: 100%; 
+    zoom: 50%;
+    // left: -150px;
+    // overflow-x: auto;
+    // position: absolute;
+
+    // overflow-y: hidden;
+    left: 30px;
+    // overflow:scroll ;
+    margin: 10px;
   }
   .modal-content{
     width: 450px !important;
@@ -444,11 +454,11 @@ table tr.thmain{
 .tablemain {
   background-color: #fff;
   box-shadow: 0 2px 5px 0 rgba(255,255,255);
-  position: fixed;
+  // position: absolute;
   overflow-y: hidden;
   // overflow-x: hidden;
   // width: 100px;
-  left: 8px;
+  // left: 8px;
 
 }
 
