@@ -1,6 +1,6 @@
 import { DatatimePipe } from './datatime.pipe';
 
-describe('DatatimePipe', () => {
+fdescribe('DatatimePipe', () => {
   it('create an instance', () => {
     const pipe = new DatatimePipe();
     expect(pipe).toBeTruthy();
