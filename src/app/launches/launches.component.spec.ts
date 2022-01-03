@@ -11,8 +11,10 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 
 import { LaunchesComponent } from './launches.component';
 import { LaunchesdataService } from './launchesdata.service';
-
-describe('LaunchesComponent', () => {
+// import { DatePipe } from '@angular/common';
+// import { DynamicTestModule } from '@angular/common';
+import { ComponentFixtureAutoDetect } from '@angular/core/testing';
+fdescribe('LaunchesComponent', () => {
   let component: LaunchesComponent;
   let fixture: ComponentFixture<LaunchesComponent>;
 
@@ -28,10 +30,14 @@ describe('LaunchesComponent', () => {
         NgxPaginationModule,
         NgxDaterangepickerMd.forRoot(),
         HttpClientTestingModule,
+        // DatePipe,
+        
+        // DynamicTestModule
         
       ],
       providers:[
-       { provide: LaunchesdataService, useValue: {}}
+       { provide: LaunchesdataService, useValue: {}},
+       { provide: ComponentFixtureAutoDetect, useValue: true }
       ]
     })
     .compileComponents();

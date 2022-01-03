@@ -36,7 +36,6 @@ import { CommonModule } from '@angular/common';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpClient,
     NgxPaginationModule,
     BrowserAnimationsModule,
     // MatButtonModule,
@@ -54,7 +53,7 @@ import { CommonModule } from '@angular/common';
     RouterModule
    ],
 
-  providers: [HttpClient],
+  providers: [],
   bootstrap: [AppComponent],
   entryComponents: []
 })

@@ -9,7 +9,7 @@ import { Launches } from './launches.model';
 })
 export class LaunchesdataService {
 
-  constructor(private http: HttpClient,private https:HttpClientModule) { }
+  constructor(private http: HttpClient) { }
   list: Launches[] = [];
   // nrOfFlights: Subject<number> = new Subject<number>();
   data: Subject<Launches[]> = new Subject<Launches[]>();
