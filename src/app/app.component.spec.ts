@@ -1,19 +1,31 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
 
-fdescribe('AppComponent', () => {
+describe('AppComponent', () => {
+  let router:any;
+  let route:any;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      
       imports: [
-        RouterTestingModule
+        RouterTestingModule.withRoutes([]),
+        RouterModule,
+     
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        RouterOutlet
       ],
+      providers: [
+      ]
     }).compileComponents();
   });
-
+  beforeEach(() => {
+    router = TestBed.get(Router)
+    route = TestBed.get(ActivatedRoute)
+  })
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;

@@ -8,9 +8,16 @@ import { Launches } from './launches.model';
   providedIn: 'root'
 })
 export class LaunchesdataService {
+  Type: any;
+  static getlaunchesData: boolean;
+  start: undefined;
+ 
+  // getValue: any;
+ 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,) { }
   list: Launches[] = [];
+  //  getValue() { return this.getValue(); }
   // nrOfFlights: Subject<number> = new Subject<number>();
   data: Subject<Launches[]> = new Subject<Launches[]>();
   url:string="https://api.spacexdata.com/v3/launches"
@@ -24,7 +31,13 @@ export class LaunchesdataService {
         `https://api.spacexdata.com/v3/launches?start=${start}&end=${end}`
       )
     }
-   
+    // if (value != null) {
+    //   const date = new Date(value);
+    //   const day = date.getDate();
+    //   const month = monthNames[date.getMonth()];
+    //   const year = date.getFullYear();
+    //   return `${month} ${day} ${year}`;
+    // } else return null;
    
     // + `offset=${offset}&limit=${limit}`
     }
@@ -34,17 +47,17 @@ export class LaunchesdataService {
     //   );
      
  //service for upcoming and past launches
- FilterLaunch(collectionname:any){
-  console.log("Fetch data from api");
-  var ans=this.http.get(this.url+"/"+collectionname);
-return(ans);
- }
+//  FilterLaunch(collectionname:any){
+//   console.log("Fetch data from api");
+//   var ans=this.http.get(this.url+"/"+collectionname);
+// return(ans);
+//  }
  //service for success ,fail & launches & fetch date data
- FilterCond(collectionname:any){
-  console.log("Fetch data from api");
-  var ans=this.http.get(this.url+"?"+collectionname);
-return(ans);
- }
+//  FilterCond(collectionname:any){
+//   console.log("Fetch data from api");
+//   var ans=this.http.get(this.url+"?"+collectionname);
+// return(ans);
+//  }
 
 
  failed(start?:string,end?: string){

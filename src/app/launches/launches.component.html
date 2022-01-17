@@ -8,7 +8,7 @@
     
     <div class="col-xl-12 calender" style="justify-content: left; top: 20px;bottom: 30px; margin-bottom: 10px;" >
       <!-- <app-filter class="filter"[list]="filterList" (onFilterChange)="filterChange($event)"  > </app-filter> -->
-      <i class="material-icons date-range-icon ngx-daterangepicker-action" (click)="openDatepicker()" style="margin-top: 5px;"> date_range </i>
+      <i class="material-icons date-range-icon ngx-daterangepicker-action" style="margin-top: 5px;"> date_range </i>
      &nbsp; <input style="margin-bottom:10px;"
       class="date-picker"
       type="text"
@@ -20,13 +20,14 @@
       [ranges]="ranges"
       [showCancel]="true"
       [showClearButton]="true"
-      
+      [locale]="localeConfig"
       placeholder="Select a Launch Date"
       (datesUpdated)="datesUpdated($event)"
+
       #dtpicker
       readonly
     />
-    <i class="material-icons arrow-down-icon ngx-daterangepicker-action" (click)="openDatepicker()"> keyboard_arrow_down </i>
+    <i class="material-icons arrow-down-icon ngx-daterangepicker-action" > keyboard_arrow_down </i>
 
   
     <!-- <input class="date-picker"
@@ -100,7 +101,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr (click)="openmodalbox(spacetemplate,ans)"    *ngFor="let ans of filter | paginate: { itemsPerPage: 10, currentPage: page,totalItems:totalLength }">
+      <tr (click)="openmodalbox(spacetemplate,ans)"  id="btn1"  *ngFor="let ans of filter | paginate: { itemsPerPage: 10, currentPage: page,totalItems:totalLength }">
         <!-- routerLink="/launchmodel/{{ans.flight_number}}" -->
         <td >{{ans.flight_number}} </td>
         <td>{{ans.launch_date_utc | date : 'd MMMM y'}} {{ans.launch_date_utc | date :
@@ -145,7 +146,7 @@
     <div class="modal-content">
     <div class="modal-header"  >
       <!-- <h4 class="modal-title pull-left">Modal Box</h4> -->
-      <button type="button" class="btn-close close " aria-label="Close" style="background: transparent; color: #1F2937;" (click)="modalRef?.hide()">
+      <button type="button" class="btn-close close " id="btn2" aria-label="Close" style="background: transparent; color: #1F2937;" (click)="modalRef?.hide()">
         <span aria-hidden="true" class="visually-hidden">&times;</span>
       </button>
     </div>

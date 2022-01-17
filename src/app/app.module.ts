@@ -18,7 +18,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {  MatInputModule } from '@angular/material/input';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 // import { ModalModule } from 'ngx-bootstrap/modal';
-import { ModalModule, BsModalRef } from 'ngx-bootstrap/modal';
+import { ModalModule, BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -52,8 +52,9 @@ import { CommonModule } from '@angular/common';
     MatTableModule,
     RouterModule
    ],
-
-  providers: [],
+// bread ui ,basic crud, typing test,imagefetchfrom api,spacexdashboard launches 
+// 
+  providers: [BsModalService],
   bootstrap: [AppComponent],
   entryComponents: []
 })

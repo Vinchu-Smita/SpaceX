@@ -14,6 +14,8 @@ import { DaterangepickerDirective } from 'ngx-daterangepicker-material';
 // const ELEMENT_DATA: [] = [
 
 // ];
+// import moment from 'moment';
+
 @Component({
   selector: 'app-launches',
   templateUrl: './launches.component.html',
@@ -71,9 +73,12 @@ ranges: any = {
 };
 invalidDates: moment.Moment[] = [moment().add(2, 'days'), moment().add(3, 'days'), moment().add(5, 'days')];
 
-isInvalidDate = (m: moment.Moment) =>  {
-  return this.invalidDates.some(d => d.isSame(m, 'day') )
-}
+// isInvalidDate = (m: moment.Moment) =>  {
+//   return this.invalidDates.some(d => d.isSame(m, 'day') )
+// }
+
+  
+
  //filterdata
 
  launch_success='all';
@@ -91,11 +96,11 @@ filter:any;
   appliedfilters: any;
   loading:boolean=false;
   spaceData:any;
-  constructor(private route:ActivatedRoute,private launcheservice:LaunchesdataService,private modalService: BsModalService,private router:Router 
-   ) { 
-    this.alwaysShowCalendars = true;
-
-  }
+  details: any;
+  enabled: boolean;
+  opened: boolean;
+  constructor( public route:ActivatedRoute,public launcheservice:LaunchesdataService,public modalService: BsModalService,public router:Router 
+   ) { }
     //  pagination//
 
   public launches:any=[];
@@ -110,6 +115,8 @@ filter:any;
    @Output() onFilterChange = new EventEmitter();
    @ViewChild(DaterangepickerDirective, { static: false }) pickerDirective: DaterangepickerDirective;
   ngOnInit(): void {
+    this.alwaysShowCalendars = true;
+
     // console.log(this.route)
     // console.log('la unches',this.launch_success)
 this.route.params.subscribe(x=> console.log(x))
@@ -118,7 +125,7 @@ this.route.params.subscribe(x=> console.log(x))
     // let id = this.route.snapshot.paramMap.get('id');
     // this.launches = this.launcheservice.getlaunchesData1(id);
 
-    this.getlaunchesData();
+    this.getlaunchesData1();
    }
   // dateCreated($event){  
     
@@ -126,15 +133,16 @@ this.route.params.subscribe(x=> console.log(x))
     
   //       this.filter = this.filter.filter(x => x.CreatedDate == $event.toJSON().split('T')[0]);  
     
-  //     }
+  //     }\
+   public _d:any;
   datesUpdated(e:any){
     this.routebyfilter(e.startDate._d.toLocaleDateString(),e.endDate._d.toLocaleDateString());
 
   }
-  openDatepicker(){
-    this.pickerDirective.open();
+  // openDatepicker(){
+  //   this.pickerDirective.open();
 
-  }
+  // }
   // getInputSize(datepicker: HTMLInputElement) {
   //   switch (datepicker.value) {
   //     case 'Past week':
@@ -154,30 +162,30 @@ this.route.params.subscribe(x=> console.log(x))
   startDate:any;
   endDate:any;
 
-      dateRangeCreated(event:any) { 
-        // this.startDate;
-        // this.endDate; 
-               // this.pickerDirective.open();
-        console.log(event)
-        // console.log(this.selected.startDate._d.toLocaleDateString(),this.selected.endDate._d.toLocaleDateString())
-        // start:this.selected.startDate._d.toLocaleDateString(),
+      // dateRangeCreated(event:any=null) { 
+      //   // this.startDate;
+      //   // this.endDate; 
+      //          // this.pickerDirective.open();
+      //   // console.log(event)
+      //   // console.log(this.selected.startDate._d.toLocaleDateString(),this.selected.endDate._d.toLocaleDateString())
+      //   // start:this.selected.startDate._d.toLocaleDateString(),
       
-        // this.launcheservice.getlaunchesData(this.selected)
-        this.routebyfilter(event.startDate._d.toLocaleDateString(),event.endDate._d.toLocaleDateString());
-        // console.log(e);
-            // this.filter = this.filter;  
-            // new Date(this.startDate) && new Date(this.endDate)
+      //   // this.launcheservice.getlaunchesData(this.selected)
+      //   this.routebyfilter(event.startDate._d.toLocaleDateString(),event.endDate._d.toLocaleDateString());
+      //   // console.log(e);
+      //       // this.filter = this.filter;  
+      //       // new Date(this.startDate) && new Date(this.endDate)
        
-        // console.log(e[0]);
-        // this.filter = this.launches.filter(m => {
+      //   // console.log(e[0]);
+      //   // this.filter = this.launches.filter(m => {
           
-        //   console.log(m);
-        // }  )  
+      //   //   console.log(m);
+      //   // }  )  
        
-          }
+      //     }
           routebyfilter(start?:any, end?:any){
             if(start !== undefined){
-              console.log(start,end,this.launch_success)
+              // console.log(start,end,this.launch_success)
               this.router.navigate(['/launches',start,end,this.launch_success])
             } else { this.route.params.subscribe(x=> {console.log(x);
               if(x['start'] !== undefined){
@@ -192,7 +200,7 @@ this.route.params.subscribe(x=> console.log(x))
             // path start, end, filter type
               }
             }
-  getlaunchesData(){
+  getlaunchesData1(){
     // const res = this.launcheservice.getlaunchesData();
     // res.subscribe((data:Launches[]) => {
     //   this.filter =this.launches = data;
@@ -205,7 +213,7 @@ this.route.params.subscribe(x=> console.log(x))
     this.route.params.subscribe(c => {console.log(c);
       if(c['launchType'] !== undefined){
            this.launch_success= c['launchType'];
-           console.log(c['launchType']);
+          //  console.log(c['launchType']);
   
       }
      if(c['start'] !== undefined){
@@ -217,7 +225,7 @@ this.route.params.subscribe(x=> console.log(x))
       const res = this.launcheservice.getlaunchesData(c['start'],c['end']);
       res.subscribe((res:Launches[]) => {
         this.filter =this.launches = res;
-        console.log(this.launches)
+        // console.log(this.launches)
       });
     }
      } else  {
@@ -228,7 +236,7 @@ this.route.params.subscribe(x=> console.log(x))
       const res = this.launcheservice.getlaunchesData(c['start'],c['end']);
       res.subscribe((res:Launches[]) => {
         this.filter =this.launches = res;
-        console.log(this.launches)
+        // console.log(this.launches)
       });}
      }
   
@@ -240,14 +248,14 @@ this.route.params.subscribe(x=> console.log(x))
     // });
   
    }
-  openmodalbox(spacetemplate:any,ans:any){
+  openmodalbox(spacetemplate:any=null,ans:any=null){
   
     // this.modalRef = this.modalService.show(LaunchesComponent, {initialState:{
     //    title:'Model Title'
     // }});
     this.spaceData = ans;
     this.modalRef = this.modalService.show(spacetemplate, Object.assign({ backdrop: 'static', class: 'modal-md bg-blue' }));
-    console.log(" spacedata response")
+    // console.log(" spacedata response")
     // this.modalRef = this.modalService.show(template, Object.assign({ backdrop: 'static', class: 'modal-md bg-blue' }));
     
     // this.launcheservice.getlaunchesData().subscribe((res:any)=>{

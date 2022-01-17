@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 // import { LaunchModelBoxComponent } from './launch-model-box/launch-model-box.component';
 import { LaunchesComponent } from './launches/launches.component';
 
-const routes: Routes = [
+export const  routes: Routes = [
   {path:"",component:LaunchesComponent},
   {path:"launches/:start/:end/:launchType",component:LaunchesComponent},
   {path:"launches/:launchType",component:LaunchesComponent}
