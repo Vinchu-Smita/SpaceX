@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
 import { Launches } from './launches.model';
-
+// https://space-dashboard1.herokuapp.com/
 describe('LaunchesdataService', () => {
   let service: LaunchesdataService;
   let mockhttpclient;
@@ -43,7 +43,85 @@ describe('LaunchesdataService', () => {
   it('should be created', inject([LaunchesdataService], (service: LaunchesdataService) => {
     expect(service).toBeTruthy();
   }));
-  
+  it('should return undefined getlaunchesData when server returns 404', () => {
+    let succeeded = false;
+    let body= undefined;
+
+    service.getlaunchesData('42').subscribe((response) => {
+      succeeded = true;
+      // body = response;
+    });
+
+    const testRequest = httpTestingController.expectOne('https://api.spacexdata.com/v3/launches');
+    testRequest.flush('', { status: 404, statusText: 'Not Found' });
+
+    expect(succeeded).toBeTrue();
+    expect(body).toBeUndefined();
+  });
+ 
+  it('should return undefined failed when server returns 404', () => {
+    let succeeded = false;
+    let body= undefined;
+
+    service.failed('42').subscribe((response) => {
+      succeeded = true;
+      // body = response;
+    });
+
+    const testRequest = httpTestingController.expectOne('https://api.spacexdata.com/v3/launches?launch_success=false&upcoming=false');
+    testRequest.flush('', { status: 404, statusText: 'Not Found' });
+
+    expect(succeeded).toBeTrue();
+    expect(body).toBeUndefined();
+  });
+  it('should return undefined success when server returns 404', () => {
+    let succeeded = false;
+    let body= undefined;
+
+    service.success('42').subscribe((response) => {
+      succeeded = true;
+      // body = response;
+    });
+
+    const testRequest = httpTestingController.expectOne('https://api.spacexdata.com/v3/launches');
+    testRequest.flush('', { status: 404, statusText: 'Not Found' });
+
+    expect(succeeded).toBeTrue();
+    expect(body).toBeUndefined();
+  });
+ 
+  it('should return undefined upcoming when server returns 404', () => {
+    let succeeded = false;
+    let body= undefined;
+
+    service.upcoming('42').subscribe((response) => {
+      succeeded = true;
+      // body = response;
+    });
+
+    const testRequest = httpTestingController.expectOne('https://api.spacexdata.com/v3/launches');
+    testRequest.flush('', { status: 404, statusText: 'Not Found' });
+
+    expect(succeeded).toBeTrue();
+    expect(body).toBeUndefined();
+  });
+ 
+  it('should return undefined all when server returns 404', () => {
+    let succeeded = false;
+    let body= undefined;
+
+    service.all('42').subscribe((response) => {
+      succeeded = true;
+      // body = response;
+    });
+
+    const testRequest = httpTestingController.expectOne('https://api.spacexdata.com/v3/launches');
+    testRequest.flush('', { status: 404, statusText: 'Not Found' });
+
+    expect(succeeded).toBeTrue();
+    expect(body).toBeUndefined();
+  });
+ 
 
 
   it('should use getlaunchesData Function', (done: DoneFn) => {
