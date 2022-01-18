@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { Launches } from './launches.model';
 import * as moment from 'moment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-
+import {Location} from '@angular/common';
 import { LaunchesdataService } from './launchesdata.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import{ MatTableDataSource} from '@angular/material/table';
@@ -99,7 +99,8 @@ filter:any;
   details: any;
   enabled: boolean;
   opened: boolean;
-  constructor( public route:ActivatedRoute,public launcheservice:LaunchesdataService,public modalService: BsModalService,public router:Router 
+  expectOne: any;
+  constructor( public route:ActivatedRoute,public launcheservice:LaunchesdataService,public modalService: BsModalService,public router:Router  ,public location:Location,
    ) { }
     //  pagination//
 
@@ -210,7 +211,8 @@ this.route.params.subscribe(x=> console.log(x))
     //   this.data = item;
      
     // });
-    this.route.params.subscribe(c => {console.log(c);
+    this.route.params.subscribe(c =>
+       {console.log(c);
       if(c['launchType'] !== undefined){
            this.launch_success= c['launchType'];
           //  console.log(c['launchType']);
@@ -257,6 +259,7 @@ this.route.params.subscribe(x=> console.log(x))
     this.modalRef = this.modalService.show(spacetemplate, Object.assign({ backdrop: 'static', class: 'modal-md bg-blue' }));
     // console.log(" spacedata response")
     // this.modalRef = this.modalService.show(template, Object.assign({ backdrop: 'static', class: 'modal-md bg-blue' }));
+    // this.modalRef.hide(); 
     
     // this.launcheservice.getlaunchesData().subscribe((res:any)=>{
     //   console.log(res)
@@ -267,9 +270,10 @@ this.route.params.subscribe(x=> console.log(x))
     
   
   }
+
   closeModal(){
-    this.modalRef?.hide(); 
-    this.spaceData =undefined
+     this.modalRef?.hide(); 
+    this.spaceData =undefined;
   }
  
 copydata=this.launches;

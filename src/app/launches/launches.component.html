@@ -101,7 +101,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr (click)="openmodalbox(spacetemplate,ans)"  id="btn1"  *ngFor="let ans of filter | paginate: { itemsPerPage: 10, currentPage: page,totalItems:totalLength }">
+      <tr (click)="openmodalbox(spacetemplate,ans)"  id="open-btn"  *ngFor="let ans of filter | paginate: { itemsPerPage: 10, currentPage: page,totalItems:totalLength }">
         <!-- routerLink="/launchmodel/{{ans.flight_number}}" -->
         <td >{{ans.flight_number}} </td>
         <td>{{ans.launch_date_utc | date : 'd MMMM y'}} {{ans.launch_date_utc | date :
@@ -146,7 +146,7 @@
     <div class="modal-content">
     <div class="modal-header"  >
       <!-- <h4 class="modal-title pull-left">Modal Box</h4> -->
-      <button type="button" class="btn-close close " id="btn2" aria-label="Close" style="background: transparent; color: #1F2937;" (click)="modalRef?.hide()">
+      <button type="button" class="btn-close close " id="cancel-btn" aria-label="Close" style="background: transparent; color: #1F2937;" (click)="modalRef?.hide()">
         <span aria-hidden="true" class="visually-hidden">&times;</span>
       </button>
     </div>

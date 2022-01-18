@@ -68,7 +68,7 @@ describe('LaunchesdataService', () => {
       // body = response;
     });
 
-    const testRequest = httpTestingController.expectOne('https://api.spacexdata.com/v3/launches?launch_success=false&upcoming=false');
+    const testRequest = httpTestingController.expectOne('https://api.spacexdata.com/v3/launches');
     testRequest.flush('', { status: 404, statusText: 'Not Found' });
 
     expect(succeeded).toBeTrue();

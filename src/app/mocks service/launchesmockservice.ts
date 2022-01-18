@@ -23,22 +23,10 @@ export class launchesmockservice {
 
 
 
- failed(start?:string,end?: string){
-  
- 
-  
-}
-success(start?:string,end?: string){
-  
-}
 
-upcoming(start?:string,end?: string){
 
-// (`https://api.spacexdata.com/v3/launches/upcoming?start=${start}&end=${end}`)
-}
+
 
   
-all(start?:string,end?: string){
-  
-}
+
 }
